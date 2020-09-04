@@ -1,6 +1,10 @@
 class Message < ApplicationRecord
   belongs_to:room
-  belongs_tp:user
+  belongs_to:user
   has_one_attacked:image
-  validates:content,presence:true
+  validates:content, presence: true, unless: :was_attached?
+
+  def was_attached?
+    self.image.attached?
+  end
 end
